@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+        .box{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input id="da" type="date">
+        <button onclick="but()">提交</button>
+        <div id="box"></div>
+    </div>
+    <script>
+ function but(){
+      var it=document.getElementById("da")
+        var targetDate =new Date(it.value)
+        targetDate=targetDate-(60*60*8*1000)
+    function diffTime(current,target){
+       
+        var sub= Math.ceil((target-current)/1000)
+        var day1=parseInt(sub/(60*60*24))
+        var hours1=parseInt(sub%(60*60*24)/(60*60))
+        var minutes1=parseInt(sub%(60*60)/60)
+        var seconds1=parseInt(sub%60)
+        var obj={
+            day:day1,
+            hours:hours1,
+            minutes:minutes1,
+            seconds:seconds1
+        }
+        return obj
+    }
+    // var res=diffTime(currentDate,targetDate)
+    // console.log(res)
+    // document.write(res.day+"天"+res.hours+"时"+res.minutes+"分"+res.seconds+"秒")
+   
+    setInterval(function(){
+     var currentDate=new Date()
+     var res=diffTime(currentDate,targetDate)
+    console.log(res)
+    
+    box.innerHTML=("距离"+it.value+"还有"+res.day+"天"+res.hours+"时"+res.minutes+"分"+res.seconds+"秒")
+    
+    },1000)}
+    </script>
+    
+</body>
+</html>
