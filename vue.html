@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.global.js"></script>
+    <style>
+        .active{
+        background-color: red;    
+        }
+    </style>
+</head>
+<body>
+   <div id="box">
+    <!-- v-model双向绑定 -->
+    <input type="text" v-model="mytext">
+    <button @click="handleclick()">add</button>
+    <ul>
+        <li v-for="item,index in datalist" :class="current===index?'active':''" @click="handlecli(index)">
+            {{item}}
+            <button @click="handledel(index)">delete</button>
+        </li>
+    </ul>
+    <div v-show="datalist.length===0">暂无</div>
+   </div>
+   <script>
+    var obj={
+        data(){
+            return{
+                mytext:"",
+                datalist:["aaaas"],
+                current:0
+            }
+        },
+        methods:{
+            handleclick(){
+               this.datalist.push(this.mytext)
+               this.mytext=""
+            },
+            handledel(index){
+                this.datalist.splice(index,1)
+            },
+            handlecli(index){
+                console.log(this.current)
+                this.current=index
+             }
+          
+        }
+    }
+   
+     var app=Vue.createApp(obj).mount("#box")
+   </script>
+</body>
+</html>
